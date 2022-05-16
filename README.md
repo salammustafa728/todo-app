@@ -5,10 +5,10 @@
 
   *  A Web Application for securely managing a To Do List
 
-[PR link]()
+[PR link](https://github.com/salammustafa728/todo-app/pull/1)
 
-[Deploy Link]()
+[Deploy Link](https://todo-app-salam.netlify.app/)
 
 # Uml
 
-![](./src/images/todolist.png)
+![uml](./src/images/todolist.png)
