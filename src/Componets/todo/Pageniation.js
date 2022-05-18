@@ -4,15 +4,28 @@ import { Pagination } from 'react-bootstrap';
 
 export default function PaginationPages(props) {
     let pageNumbers = [];
-
-    for (let i = 1; i <= Math.ceil(props.totalList / props.items); i++) {
-        pageNumbers.push(
-            <Pagination.Item onClick={() => props.paginate(i)} key={i}>{i}</Pagination.Item>
-        );
+    for (let i = 0; i < Math.ceil(props.totallist/ props.postsPerPage); i++) {
+        pageNumbers.push(i);
     }
+    
     return (
-        <Pagination>
-            {pageNumbers}
-        </Pagination>
+        <div style={{margin:'auto',width:'50%'}}>
+            <nav style={{textAlign:'center'}} >
+                    <ul className="pagination" >
+                         {
+                            pageNumbers.map((number) => {
+                                return (
+                                    <li  key={number} className='page-item' >
+                                        <button onClick={()=>props.paginate(number)} href='!#' className='page-link' > 
+                                        {number} 
+                                        </button>
+                                      
+                                        </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </nav>
+             </div>
     )
 }
