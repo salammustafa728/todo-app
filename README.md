@@ -9,6 +9,14 @@
 
 [Deploy Link](https://todo-app-salam.netlify.app/)
 
+# Phase 2: 
+* Implement the Context API to make some basic application settings available to components 
+
+* Provide the users with a form where they can change the values for those settings 
+
+[PR link]()
+
+
 # Uml
 
-![uml](./src/images/todolist.png)
+![uml](./src/images/lab32.png)
