@@ -11,6 +11,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import PaginationPages from "./Pageniation";
 import Form from "./Form.js";
+import Completed from "./Completed.js";
 
 
 const ToDo = () => {
@@ -19,8 +20,9 @@ const ToDo = () => {
   const { handleChange, handleSubmit } = useForm(addItem);
   const [currentPage, setCurrentPage] = useState(1);
   const [show, setShow] = useState(false);
-  const [postsPerPage] = useState(5);
-
+  const [postsPerPage,setPostsPerPage] = useState(3);
+  const [completedItem, setComplete] = useState(false);
+  const [arrayComplete, setArrComplete] = useState([]);
 
   function addItem(item) {
     console.log(item);
@@ -49,6 +51,18 @@ const ToDo = () => {
  const setdata = (idx) => {
     localStorage.setItem('data', JSON.stringify(settings.list));
 }
+const completed = () => {
+  const arr = [];
+  settings.list.map((ele) => {
+    if (ele.complete) {
+      arr.push(ele);
+    }
+  });
+  console.log({ arr });
+  setComplete(true);
+  setArrComplete(arr);
+  console.log( arr );
+};
 // const onSort = (sortType) => {
 //  settings.sortType=sortType;
 // }
@@ -72,6 +86,9 @@ const ToDo = () => {
       return currentPosts;
     }
   }
+  function toggleDisplay() {
+    setShow(!show);
+  }
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -87,7 +104,10 @@ const ToDo = () => {
               handleChange={handleChange}
               toggleComplete={toggleComplete}
               list={getToDoData()}
-              
+              completed={completed}
+              postsPerPage={postsPerPage}
+              setPostsPerPage={setPostsPerPage}
+              toggleDisplay={toggleDisplay}
             />
           </Col>
           <Col xs={6} md={4}>
@@ -101,6 +121,14 @@ const ToDo = () => {
               paginate={paginate}
               postsPerPage={postsPerPage}
             />
+             {completedItem && (
+              <Completed
+                completed={completed}
+                arrayComplete={arrayComplete}
+                toggleComplete={toggleComplete}
+                deleteItem={deleteItem}
+              />
+            )}
             {/* <button className='btn' type='click' onClick={(e) => onSort('asc')}>sort  asc </button> */}
           </Col>
         </Row>
