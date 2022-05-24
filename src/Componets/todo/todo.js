@@ -30,6 +30,7 @@ const ToDo = () => {
     item.complete = false;
     const saveDataList = settings.list;
     settings.setList([...saveDataList, item]);
+    localStorage.setItem('data', JSON.stringify([...saveDataList, item]));
   }
 
   function deleteItem(id) {
@@ -48,9 +49,9 @@ const ToDo = () => {
 
     settings.setList(items);
   }
- const setdata = (idx) => {
-    localStorage.setItem('data', JSON.stringify(settings.list));
-}
+//  const setdata = (idx) => {
+//     localStorage.setItem('data', JSON.stringify(settings.list));
+// }
 const completed = () => {
   const arr = [];
   settings.list.map((ele) => {
@@ -87,8 +88,8 @@ const completed = () => {
     }
   }
   function toggleDisplay() {
-    setShow(!show);
-  }
+    settings.setDisplay(!settings.display);
+}
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -114,7 +115,8 @@ const completed = () => {
 
             <List list={getToDoData()} toggleComplete={toggleComplete}
                deleteItem={deleteItem}
-               setdata={setdata}
+              //  setdata={setdata}
+               
             />
             <PaginationPages
               totallist={settings.list.length}
