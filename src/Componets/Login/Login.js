@@ -102,7 +102,7 @@ const Login = () => {
                 >
                   <option> select your role </option>
                   <option value="user">user</option>
-                  {/* <option value="admin">writer</option> */}
+                  <option value="admin">writer</option>
                   <option value="admin">editor</option>
                   <option value="admin">admin</option>
                 </Form.Select>
