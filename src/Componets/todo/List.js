@@ -46,11 +46,13 @@ const List = (props) => {
               <ListGroup.Item as="li" disabled>
                 Difficulty: {item.difficulty}
               </ListGroup.Item>
+              <When condition={longinContext.canDo('delete')}>
               <ListGroup.Item as="li">
                 <div onClick={() => props.toggleComplete(item.id)}>
                   Complete: {item.complete.toString()}
                 </div>
               </ListGroup.Item>
+              </When>
               <br />
             </div>
           </div>
