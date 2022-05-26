@@ -20,6 +20,7 @@ const Formm = (props) => {
       </header>
 
       <Form onSubmit={props.handleSubmit}>
+      <When condition={loginCon.canDo('create')}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <h2>Add To Do Item</h2>
           <Form.Label>To Do Item </Form.Label>
@@ -52,7 +53,10 @@ const Formm = (props) => {
             name="difficulty"
           />
         </Form.Group>
-        <When condition={loginCon.canDo('create')}>
+        <Button variant="primary" type="submit" >
+          Submit
+        </Button>
+        </When>
         <Form.Group className="mb-3" controlId="formBasicCheckbox2">
           <span>post per page</span>
           <Form.Range
@@ -64,11 +68,9 @@ const Formm = (props) => {
             name="postPerPage"
           />
         </Form.Group>
-        </When>
+       
         <Switch  defaultChecked={true} onClick={props.toggleDisplay}>view Done Items  </Switch>
-        <Button variant="primary" type="submit" >
-          Submit
-        </Button>
+       
        
       </Form>
     </div>

@@ -111,7 +111,6 @@ const ToDo = () => {
                 list={getToDoData()}
                 toggleComplete={toggleComplete}
                 deleteItem={deleteItem}
-                //  setdata={setdata}
               />
               <PaginationPages
                 totallist={settings.list.length}
