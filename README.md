@@ -16,6 +16,17 @@
 
 [PR link2](https://github.com/salammustafa728/todo-app/pull/3)
 
+# phase 3:  <Login /> and <Auth /> 
+
+make the users be logged in, in order to see the to do items. Additionally, based on their user type, they will be allowed (or denied) to perform actions such as editing or deleting them.
+
+for login try=>
+
+* admin: admin and 123
+* user: user and 123
+
+
+[PR link](https://github.com/salammustafa728/todo-app/pull/6)
 
 # Uml
 
