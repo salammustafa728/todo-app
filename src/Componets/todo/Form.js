@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { Switch } from '@blueprintjs/core';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
+import { When } from "react-if";
+import { LoginContext } from "../context/ContextLog";
 
 const Formm = (props) => {
+  const loginCon = useContext(LoginContext);
   const postPerPageToggle = (pages) => {
     if (parseInt(pages) !== props.postPerPage) {
         props.setPostsPerPage(parseInt(pages));
@@ -50,6 +52,7 @@ const Formm = (props) => {
             name="difficulty"
           />
         </Form.Group>
+        <When condition={loginCon.canDo('create')}>
         <Form.Group className="mb-3" controlId="formBasicCheckbox2">
           <span>post per page</span>
           <Form.Range
@@ -61,6 +64,7 @@ const Formm = (props) => {
             name="postPerPage"
           />
         </Form.Group>
+        </When>
         <Switch  defaultChecked={true} onClick={props.toggleDisplay}>view Done Items  </Switch>
         <Button variant="primary" type="submit" >
           Submit

@@ -12,15 +12,17 @@ import Col from "react-bootstrap/Col";
 import PaginationPages from "./Pageniation";
 import Form from "./Form.js";
 import Completed from "./Completed.js";
-
+import { LoginContext } from "../context/ContextLog";
+import { When } from "react-if";
 
 const ToDo = () => {
   const settings = useContext(setteingsContext);
+  const loginCon = useContext(LoginContext);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem);
   const [currentPage, setCurrentPage] = useState(1);
-  const [show, setShow] = useState(false);
-  const [postsPerPage,setPostsPerPage] = useState(3);
+  const [ setShow] = useState(false);
+  const [postsPerPage, setPostsPerPage] = useState(3);
   const [completedItem, setComplete] = useState(false);
   const [arrayComplete, setArrComplete] = useState([]);
 
@@ -30,7 +32,7 @@ const ToDo = () => {
     item.complete = false;
     const saveDataList = settings.list;
     settings.setList([...saveDataList, item]);
-    localStorage.setItem('data', JSON.stringify([...saveDataList, item]));
+    localStorage.setItem("data", JSON.stringify([...saveDataList, item]));
   }
 
   function deleteItem(id) {
@@ -41,7 +43,7 @@ const ToDo = () => {
 
   function toggleComplete(id) {
     const items = settings.list.map((item) => {
-      if (item.id == id) {
+      if (item.id === id) {
         item.complete = !item.complete;
       }
       return item;
@@ -49,33 +51,25 @@ const ToDo = () => {
 
     settings.setList(items);
   }
-//  const setdata = (idx) => {
-//     localStorage.setItem('data', JSON.stringify(settings.list));
-// }
-const completed = () => {
-  const arr = [];
-  settings.list.map((ele) => {
-    if (ele.complete) {
-      arr.push(ele);
-    }
-  });
-  console.log({ arr });
-  setComplete(true);
-  setArrComplete(arr);
-  console.log( arr );
-};
-// const onSort = (sortType) => {
-//  settings.sortType=sortType;
-// }
-// const sorted = settings.list.sort((a, b) => {
-//   const isReversed = ((settings.sortType === 'desc') && (a.difficulty < b.difficulty)) ? -1 : 1;
-//   return isReversed * a.text.localeCompare(b.text);
-// });
+
+  const completed = () => {
+    const arr = [];
+    settings.list.map((ele) => {
+      if (ele.complete) {
+        arr.push(ele);
+      }
+    });
+    // console.log({ arr });
+    setComplete(true);
+    setArrComplete(arr);
+    // console.log(arr);
+  };
+
   useEffect(() => {
     let incompleteCount = settings.list.filter((item) => !item.complete).length;
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete}`;
-  });
+  },[settings.list, incomplete]);
   function getToDoData() {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -89,7 +83,7 @@ const completed = () => {
   }
   function toggleDisplay() {
     settings.setDisplay(!settings.display);
-}
+  }
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -97,43 +91,44 @@ const completed = () => {
     <>
       <br />
       <Container>
-        <Row>
-          <Col xs={12} md={8}>
-            <Form
-              incomplete={incomplete}
-              handleSubmit={handleSubmit}
-              handleChange={handleChange}
-              toggleComplete={toggleComplete}
-              list={getToDoData()}
-              completed={completed}
-              postsPerPage={postsPerPage}
-              setPostsPerPage={setPostsPerPage}
-              toggleDisplay={toggleDisplay}
-            />
-          </Col>
-          <Col xs={6} md={4}>
-
-            <List list={getToDoData()} toggleComplete={toggleComplete}
-               deleteItem={deleteItem}
-              //  setdata={setdata}
-               
-            />
-            <PaginationPages
-              totallist={settings.list.length}
-              paginate={paginate}
-              postsPerPage={postsPerPage}
-            />
-             {completedItem && (
-              <Completed
+        <When condition={loginCon.loggedIn}>
+          <Row>
+            <Col xs={12} md={8}>
+              <Form
+                incomplete={incomplete}
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                toggleComplete={toggleComplete}
+                list={getToDoData()}
                 completed={completed}
-                arrayComplete={arrayComplete}
+                postsPerPage={postsPerPage}
+                setPostsPerPage={setPostsPerPage}
+                toggleDisplay={toggleDisplay}
+              />
+            </Col>
+            <Col xs={6} md={4}>
+              <List
+                list={getToDoData()}
                 toggleComplete={toggleComplete}
                 deleteItem={deleteItem}
+                //  setdata={setdata}
               />
-            )}
-            {/* <button className='btn' type='click' onClick={(e) => onSort('asc')}>sort  asc </button> */}
-          </Col>
-        </Row>
+              <PaginationPages
+                totallist={settings.list.length}
+                paginate={paginate}
+                postsPerPage={postsPerPage}
+              />
+              {completedItem && (
+                <Completed
+                  completed={completed}
+                  arrayComplete={arrayComplete}
+                  toggleComplete={toggleComplete}
+                  deleteItem={deleteItem}
+                />
+              )}
+            </Col>
+          </Row>
+        </When>
       </Container>
     </>
   );

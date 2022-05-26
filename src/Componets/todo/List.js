@@ -3,10 +3,13 @@ import ListGroup from "react-bootstrap/ListGroup";
 // import Button from "react-bootstrap/Button";
 import { CloseButton, Badge } from "react-bootstrap";
 import { setteingsContext } from "../context/Setteings";
+import { LoginContext } from "../context/ContextLog";
+import { When } from "react-if";
 
 
 const List = (props) => {
   const settings = useContext(setteingsContext);
+  const longinContext = useContext(LoginContext);
 
   return (
     <div>
@@ -30,8 +33,9 @@ const List = (props) => {
                     {item.complete ? "Complete" : "incomplete"}
                   </h5>
                 </Badge>
-               
+               <When condition={longinContext.canDo('delete')}>
                 <CloseButton style={{float:"right"}}  onClick={() => props.deleteItem(item.id)} />
+                </When>
               </ListGroup.Item>
               <ListGroup.Item as="li"  variant="primary">
               {item.text}
@@ -46,7 +50,6 @@ const List = (props) => {
                 <div onClick={() => props.toggleComplete(item.id)}>
                   Complete: {item.complete.toString()}
                 </div>
-               
               </ListGroup.Item>
               <br />
             </div>

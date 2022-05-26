@@ -1,29 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import Settings from "./Componets/context/Setteings";
 import "normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import ToDo from "./Componets/todo/todo";
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Routes,
-//   Route,
-// } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Header from "./Componets/Header/Header";
 import Footer from "./Componets/Footer/Footer";
+// import { When } from "react-if";
+import Login from "./Componets/Login/Login";
+// import { LoginContext } from "./Componets/context/ContextLog";
+import ContextLog from "./Componets/context/ContextLog";
+export default function App() {
+  // const loginCon = useContext(LoginContext); //login context
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <>
+  return (
+    <>
+      <ContextLog>
         <Settings>
           <Header />
-          <ToDo />
+          <Login />
+        
+            <ToDo />
+        
+          <Footer />
         </Settings>
-        <Footer />
-      </>
-    );
-  }
+      </ContextLog>
+     
+    </>
+  );
 }

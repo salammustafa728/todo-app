@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Button, Alignment } from "@blueprintjs/core";
+import { LoginContext } from "../context/ContextLog";
+import { When } from "react-if";
 
 export default function Header() {
+  const loginContext = useContext(LoginContext);
   return (
     <>
       <Navbar className={`bp4-dark`}>
@@ -9,7 +12,11 @@ export default function Header() {
           <Navbar.Heading>To-Do List App</Navbar.Heading>
           <Navbar.Divider />
           <Button className="bp4-minimal" icon="home" text="Home" />
-          {/* <Button className="bp4-minimal" icon="document" text="Files" /> */}
+          <When condition={loginContext.loggedIn}>
+                        <Button intent='danger' onClick={(e) => loginContext.logout()}>
+                            Logout
+                        </Button>
+                    </When>
         </Navbar.Group>
       </Navbar>
     </>
