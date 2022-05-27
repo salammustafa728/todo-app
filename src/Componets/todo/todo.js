@@ -55,9 +55,11 @@ const ToDo = () => {
   const completed = () => {
     const arr = [];
     settings.list.map((ele) => {
+      
       if (ele.complete) {
         arr.push(ele);
       }
+      return arr;
     });
     // console.log({ arr });
     setComplete(true);

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 // import Button from "react-bootstrap/Button";
 import { CloseButton, Badge } from "react-bootstrap";
@@ -46,7 +46,7 @@ const List = (props) => {
               <ListGroup.Item as="li" disabled>
                 Difficulty: {item.difficulty}
               </ListGroup.Item>
-              <When condition={longinContext.canDo('delete')}>
+              <When condition={longinContext.canDo('update')}>
               <ListGroup.Item as="li">
                 <div onClick={() => props.toggleComplete(item.id)}>
                   Complete: {item.complete.toString()}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Settings from "./Componets/context/Setteings";
 import "normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
