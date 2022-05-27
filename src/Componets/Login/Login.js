@@ -102,8 +102,8 @@ const Login = () => {
                 >
                   <option> select your role </option>
                   <option value="user">user</option>
-                  <option value="writer">writer</option>
-                  <option value="editor">editor</option>
+                  {/* <option value="writer">writer</option>
+                  <option value="editor">editor</option> */}
                   <option value="admin">admin</option>
                 </Form.Select>
                 <br/>
