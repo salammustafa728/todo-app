@@ -53,6 +53,7 @@ export default function LoginProvider(props) {
     useEffect(() => {
         const myUserInfo = cookie.load('userData');
         validateMyUser(myUserInfo);
+          // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
